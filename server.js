@@ -17,31 +17,18 @@ mongoose.connect('mongodb://root:abc123@ds135399.mlab.com:35399/ecommerce', func
   }
 })
 
-//middleware for morgan to add loggin
+//middlewares
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.engine('ejs', ejsEngine);
 app.set('view engine', 'ejs');
 
-// Renders the home page of the Ecommerce application
-app.get('/', function(req, res) {
-  res.render('home');
-});
-
-// API to create a user profile in mongodb
-app.post('/create-user', function(req, res, next) {
-  var user = new User();
-
-  user.profile.name = req.body.name;
-  user.password = req.body.password;
-  user.email = req.body.email;
-
-  user.save(function(err) {
-    if(err) return next(err);
-    res.json("New user is created successfully!");
-  });
-});
+var mainRoutes = require('./routes/main');
+var userRoutes = require('./routes/user');
+app.use(mainRoutes);
+app.use(userRoutes);
 
 // Running a server using Node JS
 app.listen(3000, function(err) {
