@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.engine('ejs', ejsEngine);
 app.set('view engine', 'ejs');
 
+// Renders the home page of the Ecommerce application
 app.get('/', function(req, res) {
   res.render('home');
 });
