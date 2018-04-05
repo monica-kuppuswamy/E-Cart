@@ -2,6 +2,8 @@ var express = require('express');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
+var ejsEngine = require('ejs-mate');
 
 var app = express();
 
@@ -19,6 +21,12 @@ mongoose.connect('mongodb://root:abc123@ds135399.mlab.com:35399/ecommerce', func
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.engine('ejs', ejsEngine);
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res) {
+  res.render('home');
+});
 
 // API to create a user profile in mongodb
 app.post('/create-user', function(req, res, next) {
