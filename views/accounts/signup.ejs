@@ -2,11 +2,21 @@
 
 <div class="row">
   <div class="col-lg-6 col-md-offset-3">
+    <br>
+    <br>
+    <br>
+    
+    <% if (errors.length > 0) { %>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismmiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%= errors %>
+        </div>
+    <% } %>
+
 
     <form method="post">
-      <br>
-      <br>
-      <br>
       <h1>Sign Up to get the Best Deals!</h1>
       <div class"form-group">
         <label>Username: </label>
