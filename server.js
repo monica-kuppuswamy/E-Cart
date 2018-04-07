@@ -7,6 +7,8 @@ var ejsEngine = require('ejs-mate');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
+var MongoStore = require('connect-mongo')(session); // to store session on the server side
+var passport = require('passport');
 
 var app = express();
 
@@ -31,10 +33,13 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(session({
   resave: true,
-  saveUnintialized: true,
-  secret: appInfo.secretKey
+  saveUninitialized: true,
+  secret: appInfo.secretKey,
+  store: new MongoStore({ url: appInfo.database, autoReconnect: true})
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 var mainRoutes = require('./routes/main');
 var userRoutes = require('./routes/user');

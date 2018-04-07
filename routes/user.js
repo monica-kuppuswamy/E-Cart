@@ -1,5 +1,24 @@
 var router = require('express').Router();
 var User = require('../models/user');
+var passport = require('passport');
+var verifyLogin = require('../config/authenticateLogin');
+
+router.get('/login', function(req, res) {
+  if(req.user) return res.redirect('/');
+  res.render('accounts/login', {
+    message : req.flash('loginMessage')
+  })
+});
+
+router.get('/profile', function(req, res) {
+  res.render('accounts/profile');
+})
+
+router.post('/login', passport.authenticate('local-login', {
+  successRedirect: '/profile',
+  failureRedirect: '/login',
+  failureFlash: true
+})); // using the middleware created
 
 router.get('/signup', function(req, res) {
   res.render('accounts/signup', {
