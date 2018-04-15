@@ -4,7 +4,7 @@ var passport = require('passport');
 var verifyLogin = require('../config/authenticateLogin');
 
 router.get('/login', function(req, res) {
-  if(req.user) return res.redirect('/');
+  if(req.user) return res.redirect('/profile');
   res.render('accounts/login', {
     message : req.flash('loginMessage')
   })
@@ -48,5 +48,11 @@ router.post('/signup', function(req, res, next) {
     }
   });
 });
+
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect("/");
+})
+
 
 module.exports = router;
