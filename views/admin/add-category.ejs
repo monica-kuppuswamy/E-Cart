@@ -7,7 +7,7 @@
     <br>
 
     <% if (message.length > 0) { %>
-        <div class="alert alert-danger alert-dismissible">
+        <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismmiss="alert" aria-label="close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -16,22 +16,18 @@
     <% } %>
 
     <form method="post">
-      <h1>Sign In to Continue</h1>
-      <div class"form-group col-md-4">
+      <h1>Add a new Category</h1>
+      <div class"form-group col-md-6">
         <br/>
-        <label>Email: </label>
+        <label>Enter Category Name: </label>
         <br>
-        <input type="email" class="form-control" name="email"/>
-
-        <br>
-        <label>Password: </label>
-        <br>
-        <input type="password" class="form-control" name="password"/>
+        <input type="text" class="form-control" name="name"/>
+        <br/>
+        <button type="submit" class="btn btn-success">Add Category</button>
       </div>
       <br>
-      <button type="submit" class="btn btn-success">Login</button>
     </form>
-    <br/>
-    <hr/>
+    <br>
+    <br>
   </div>
 </div>

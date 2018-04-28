@@ -14,6 +14,7 @@ var app = express();
 
 var appInfo = require('./config/appinfo');
 var User = require('./models/user');
+var Categories = require('./models/category');
 
 mongoose.connect(appInfo.database, function(err) {
   if(err) {
@@ -43,12 +44,23 @@ app.use(passport.session());
 app.use(function(req, res, next) {
   res.locals.user = req.user;
   next();
-})
+});
+
+
+app.use(function(req, res, next) {
+  Categories.find({}, function(err, categories) {
+    if(err) return next(err);
+    res.locals.productCategories = categories;
+    next();
+  });
+});
 
 var mainRoutes = require('./routes/main');
 var userRoutes = require('./routes/user');
+var adminRoutes = require('./routes/admin');
 app.use(mainRoutes);
 app.use(userRoutes);
+app.use(adminRoutes);
 
 // Running a server using Node JS
 app.listen(appInfo.port, function(err) {
