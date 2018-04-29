@@ -34,7 +34,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdown01">
 
           <% for(var i = 0; i < productCategories.length; i++) { %>
-            <a class="dropdown-item"><%= productCategories[i].name %></a>
+            <a href="/products/<%= productCategories[i]._id %>" class="dropdown-item"><%= productCategories[i].name %></a>
           <% } %>
 
         </div>
